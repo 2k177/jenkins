@@ -18,4 +18,12 @@ pipeline {
             }
         }
     }
+     post {
+        always {
+            echo "This step is executed always"
+        }
+        failure {
+            echo 'The Pipeline failed :('
+        }
+    }
 }
