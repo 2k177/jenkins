@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+     parameters {
+        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
+    }
     stages {
         stage('Example stage 1') {
             environment {
@@ -12,7 +14,7 @@ pipeline {
         }
         stage('Example stage 2') {
             steps {
-                echo "Example stage 2"
+                echo "${params.Greeting} World!"
             }
         }
     }
