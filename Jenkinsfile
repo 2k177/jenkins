@@ -10,6 +10,8 @@ pipeline {
             }
             steps {
                 echo "Example stage ........"
+                DANUU_ID = credentials('danuu_id')
+                echo '${DANUU_ID} : danuu creds'
             }
         }
     }
