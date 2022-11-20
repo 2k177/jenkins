@@ -1,17 +1,18 @@
 pipeline {
     agent any
-    environment { 
-        CC = 'clang'
-    }
+    
     stages {
-        stage('Example') {
-            environment { 
-                DEBUG_FLAGS = '-g'
-                DANUU_ID = credentials('danuu_id')
-            }
+        stage('Example stage 1') {
+            environment {
+                KEY_ID= credentials('danuu_id')
+                }
             steps {
-                echo "Example stage ........"
-                echo '${DANUU_ID} : danuu creds'
+                echo "Creds: $KEY_ID"
+            }
+        }
+        stage('Example stage 2') {
+            steps {
+                echo "Example stage 2"
             }
         }
     }
