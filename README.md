@@ -1,18 +1,23 @@
 # jenkins
-## Cron jobs in declarative pipeline
+## input directive
 
-To specify multiple values for one field, the following operators are available. In the order of precedence,
+The input directive on a stage allows you to prompt for input, using the input step. The stage will pause after any options have been applied, and before entering the agent block for that stage or evaluating the when condition of the stage. If the input is approved, the stage will then continue. Any parameters provided as part of the input submission will be available in the environment for the rest of the stage.
 
-* specifies all valid values
+Configuration options
+message
+Required. This will be presented to the user when they go to submit the input.
 
-M-N specifies a range of values
+id
+An optional identifier for this input. The default value is based on the stage name.
 
-M-N/X or */X steps by intervals of X through the specified range or whole valid range
+ok
+Optional text for the "ok" button on the input form.
 
-A,B,…​,Z enumerates multiple values
+submitter
+An optional comma-separated list of users or external group names who are allowed to submit this input. Defaults to allowing any user.
 
-To allow periodically scheduled tasks to produce even load on the system, the symbol H (for “hash”) should be used wherever possible. For example, using 0 0 * * * for a dozen daily jobs will cause a large spike at midnight. In contrast, using H H * * * would still execute each job once a day, but not all at the same time, better using limited resources.
+submitterParameter
+An optional name of an environment variable to set with the submitter name, if present.
 
-The H symbol can be used with a range. For example, H H(0-7) * * * means some time between 12:00 AM (midnight) to 7:59 AM.
-
- @yearly, @annually, @monthly, @weekly, @daily, @midnight, and @hourly are supported as convenient aliases. These use the hash system for automatic balancing. For example, @hourly is the same as H * * * * and could mean at any time during the hour. @midnight actually means some time between 12:00 AM and 2:59 AM.
+parameters
+An optional list of parameters to prompt the submitter to provide. See parameters for more information.
