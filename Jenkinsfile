@@ -1,32 +1,16 @@
 pipeline {
     agent any
-    triggers {
-        cron 'H * * * *'
-     }
-     parameters {
-        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-    }
+    options {
+                timeout(time: 5, unit: 'SECONDS') 
+            }
     stages {
-        stage('Example stage 1') {
-            environment {
-                KEY_ID= credentials('danuu_id')
-                }
-            steps {
-                echo "Creds: $KEY_ID"
+        stage('Example') {
+            options {
+                timeout(time: 3, unit: 'SECONDS') 
             }
-        }
-        stage('Example stage 2') {
             steps {
-                echo "${params.Greeting} World!"
+                echo 'Hello World'
             }
-        }
-    }
-     post {
-        always {
-            echo "This step is executed always"
-        }
-        failure {
-            echo 'The Pipeline failed :('
         }
     }
 }
