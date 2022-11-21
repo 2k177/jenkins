@@ -1,12 +1,17 @@
 pipeline {
     agent any
-    triggers {
-        cron('H */4 * * 1-5')
-    }
     stages {
         stage('Example') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Vance', description: 'Who should I say hello to?')
+                }
+            }
             steps {
-                echo 'Hello World'
+                echo "Hello, ${PERSON}, nice to meet you."
             }
         }
     }
