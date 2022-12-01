@@ -7,6 +7,7 @@ pipeline {
         stage('Example') {
             options {
                 timeout(time: 3, unit: 'SECONDS') 
+                timestamps()
             }
             steps {
                 echo 'Hello World'
